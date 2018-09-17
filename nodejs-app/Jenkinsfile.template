@@ -40,9 +40,6 @@ pipeline {
       options {
         timeout(time: 30, unit: 'SECONDS') 
       }
-      steps {
-        echo "Continuing with deployment - approved by ${APPROVER}"
-      }
     }
    }
 }
