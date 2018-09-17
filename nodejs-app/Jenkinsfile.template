@@ -4,6 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '2'))
   }
    stages {
+    agent { label 'nodejs-app' }
     stage('Test') {
         steps {
           container('nodejs') {
