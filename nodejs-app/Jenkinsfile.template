@@ -5,6 +5,22 @@ pipeline {
     skipDefaultCheckout true
     preserveStashes(buildCount: 2)
   }
+  stages {
+    stage('Test') {
+      agent { label 'nodejs-app' }
+      steps {
+        checkout scm
+        container('nodejs') {
+          echo 'Hello World!'   
+          sh 'node --version'
+        }
+      }
+      post {
+        success {
+          stash name: 'app', includes: '*.js, public/**, views/*, Dockerfile'
+        }
+      }
+    }
     stage('Build and Push Image') {
       agent any
       when {
