@@ -78,23 +78,27 @@ spec:
         }
       }    
     }
-    stage('Build and Push Image') {
-      agent any
+    stage('Build and Deploy') {
       when {
         beforeAgent true
         branch 'master'
-      }
-      steps {
-        echo "TODO - build and push image"
-        unstash 'app'
-      }
-    }
-    stage('Deploy') {
-      options {
-        timeout(time: 60, unit: 'SECONDS') 
-      }
-      steps {
-        echo "Continuing with deployment"
+      }  
+      stages {
+        stage('Build and Push Image') {
+          agent any
+          steps {
+            echo "TODO - build and push image"
+            unstash 'app'
+          }
+        }
+        stage('Deploy') {
+          options {
+            timeout(time: 60, unit: 'SECONDS') 
+          }
+          steps {
+            echo "Continuing with deployment"
+          }
+        }
       }
     }
   }
