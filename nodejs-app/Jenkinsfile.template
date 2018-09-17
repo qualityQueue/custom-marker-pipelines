@@ -19,9 +19,9 @@ pipeline {
         kubernetes {
           label 'nodejs-app-inline'
           yaml """
-          kind: Pod
-          metadata:
-          name: nodejs-app
+kind: Pod
+metadata:
+  name: nodejs-app
 spec:
   containers:
   - name: nodejs
