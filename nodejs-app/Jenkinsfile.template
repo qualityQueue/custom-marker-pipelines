@@ -4,6 +4,14 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '2'))
     skipDefaultCheckout true
   }
+  post {
+    aborted {
+      echo "Why didn't you push my button?"
+    }
+    success {
+        stash name: 'app', includes: '*.js, public/**, views/*, Dockerfile'
+    }
+  }
    stages {
     stage('Test') {
         checkout scm
