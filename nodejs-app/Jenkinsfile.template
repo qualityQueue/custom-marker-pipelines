@@ -1,11 +1,11 @@
 pipeline {
-   agent { label 'nodejs-app' }
+   agent none
    options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
   }
    stages {
-    agent { label 'nodejs-app' }
     stage('Test') {
+        agent { label 'nodejs-app' }
         steps {
           container('nodejs') {
             echo 'Hello World!'   
