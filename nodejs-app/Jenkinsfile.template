@@ -9,9 +9,6 @@ pipeline {
     aborted {
       echo "Why didn't you push my button?"
     }
-    success {
-        stash name: 'app', includes: '*.js, public/**, views/*, Dockerfile'
-    }
   }
    stages {
     stage('Test') {
@@ -43,6 +40,11 @@ spec:
             echo 'Hello World!'   
             sh 'node --version'
           }
+        }
+        post {
+            success {
+               stash name: 'app', includes: '*.js, public/**, views/*, Dockerfile'
+           }
         }
       }
      stage('Build and Push Image') {
